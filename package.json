@@ -1,0 +1,29 @@
+{
+  "name": "node-url-shortener",
+  "version": "0.0.1",
+  "description": "A simple URL shortener built with Express.js, MongoDB, and Handlebars.js meant for easy deployment to Heroku!",
+  "main": "server.js",
+  "repository": "https://github.com/nprail/url-shortener",
+  "author": "Noah Prail <me@nprail.me>",
+  "license": "MIT",
+  "private": false,
+  "homepage": "https://go.nprail.me/app",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "helmet": "^3.8.1",
+    "mongoose": "^4.11.11",
+    "morgan": "^1.8.2",
+    "shortid": "^2.2.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
