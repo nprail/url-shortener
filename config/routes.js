@@ -10,7 +10,7 @@ module.exports = (app, config) => {
 
     router.get('/app', (req, res) => {
         res.render('home', {
-            title: config.domain,
+            domain: config.domain,
             externalUrl: config.externalUrl()
         })
     })
