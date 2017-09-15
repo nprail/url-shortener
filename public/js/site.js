@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // click on button submit
     $.fn.serializeObject = function () {
         var o = {};
         var a = this.serializeArray();
@@ -19,7 +18,7 @@ $(document).ready(function () {
         rules: {
             custom: {
                 required: false,
-                minlength: 4
+                minlength: 2
             },
             url: {
                 required: true,
@@ -36,14 +35,16 @@ $(document).ready(function () {
             rules: {
                 custom: {
                     required: false,
-                    minlength: 4
+                    minlength: 2
                 }
             }
         });
     });
+
     $("#url").change(function () {
         $("#form").validate(formValidation);
     });
+
     $("#options").click(function () {
         if ($('.customize-link').is(":visible")) {
             $('.customize-link').hide();
@@ -53,22 +54,22 @@ $(document).ready(function () {
     });
 
     $('#submit').on('click', function () {
+        $("#form").validate(formValidation);
         var isvalid = $("#form").valid();
         if (isvalid) {
-            var formData = $('#form').serializeObject()
+            var formData = $('#form').serializeObject();
 
-            $.ajax({
-                url: '/app/api/links/shorten', // url where to submit the request
-                type: 'POST', // type of action POST || GET
-                dataType: 'json', // data type
-                data: JSON.stringify(formData), // post data || get data
+            return $.ajax({
+                url: '/d/api/links/shorten',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(formData),
                 processData: 'application/json',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 success: function (result) {
-                    console.log(result);
                     $('#form').hide();
                     $('.success').show();
 
@@ -77,7 +78,8 @@ $(document).ready(function () {
                     $('a.shorturl-link').attr('href', shortURLhref + result._id);
                 },
                 error: function (xhr, resp, text) {
-                    console.log(xhr, resp, text);
+                    $('.error-alert').show();
+                    $('.error-text').text(text);
                 }
             })
         }

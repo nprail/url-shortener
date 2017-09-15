@@ -1,7 +1,7 @@
 const cors = require('cors')
 module.exports = function (app, config) {
   const v1Router = require('./v1')(app, config)
-  const prefix = '/app/api'
+  const prefix = '/d/api'
   /**
    * GET /api
    */

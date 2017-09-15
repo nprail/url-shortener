@@ -18,5 +18,8 @@ module.exports = (app) => {
     }))
     app.set('view engine', '.hbs')
     app.use(express.static(path.normalize(config.rootPath + '/public')))
-    app.use('/static', express.static(path.normalize(config.rootPath + '/public')))
+    app.use('/d/static', express.static(path.normalize(config.rootPath + '/public')))
+
+    var currentYear = new Date().getFullYear();
+    app.locals.date = currentYear
 }
