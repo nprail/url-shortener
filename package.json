@@ -10,9 +10,11 @@
   "homepage": "https://go.nprail.me/app",
   "scripts": {
     "start": "node server.js",
+    "postinstall": "aglio --theme-variables streak -i apiary.apib --theme-template triple -o public/docs.html",
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "aglio": "^2.3.0",
     "body-parser": "^1.18.1",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",

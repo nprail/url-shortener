@@ -7,7 +7,7 @@ exports.all = function (req, res) {
     let perPage = Math.max(0, req.query.per_page) || 50
     let page = Math.max(0, req.query.page)
     let sort = req.query.sort || 'desc'
-    let orderBy = req.query.order_by || 'created_at'
+    let orderBy = req.query.order_by || 'created'
     let sortObj = {}
     sortObj[orderBy] = sort
 
