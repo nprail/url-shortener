@@ -1,0 +1,70 @@
+FORMAT: 1A
+HOST: http://go.nprail.me/d/api/v1
+
+# URLShortener
+
+A simple and modern URL shortener built with Express.js, MongoDB, and Handlebars.js built for easy deployment to Heroku!
+
+## Links [/links{?per_page,page,sort,order_by}]
+
+### List All Links [GET]
++ Parameters
+    + per_page: `50` (number) - Links per page
+    + page: `0` (number) - Page number (starts a 0)
+    + sort: `desc` (string) - Sort direction (desc, asc)
+    + order_by: `created` (string) - Item to order by
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "Hktmf6Y5-",
+                "url": "https://examplelongurl.com/seriously/really/long/url/",
+                "created": "2015-08-05T08:40:51.620Z",
+            },
+            {
+                "_id": "source",
+                "url": "https://github.com/nprail/url-shortener",
+                "custom": "source",
+                "created": "2015-08-05T08:40:51.620Z",
+            }
+        ]
+
+## Shorten [/links/shorten]
+
+### Shorten a Link [POST]
+
+
++ Request (application/json)
+
+        {
+            "url": "https://examplelongurl.com/seriously/really/long/url/"
+        }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "_id": "Hktmf6Y5-",
+                "url": "https://examplelongurl.com/seriously/really/long/url/",
+                "created": "2015-08-05T08:40:51.620Z",
+            }
+
+## Lookup [/links/lookup/{link_id}]
+
+### Lookup a URL [GET]
+
+
++ Parameters
+    + link_id (required) - Short URL code.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "_id": "Hktmf6Y5-",
+                "url": "https://examplelongurl.com/seriously/really/long/url/",
+                "created": "2015-08-05T08:40:51.620Z",
+            }
