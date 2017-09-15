@@ -6,9 +6,9 @@ module.exports = function (config) {
     router.get('/', controller.all)
     router.post('/shorten', controller.create)
 
-    router.get('/:link_id', controller.show)
-    //router.put('/:link_id', controller.update)
-    //router.delete('/:link_id', controller.delete)
+    router.get('/lookup/:link_id', controller.show)
+    //router.put('/update/:link_id', controller.update)
+    //router.delete('/delete/:link_id', controller.delete)
 
     return router
 }

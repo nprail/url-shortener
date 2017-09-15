@@ -2,9 +2,14 @@ require('dotenv').config()
 const path = require('path')
 const env = process.env
 
-module.exports = {
+const config = {
     port: env.PORT || 3000,
     domain: env.DOMAIN || 'go.nprail.me',
+    protocol: env.PROTOCOL || 'http',
     mongoUri: env.MONGODB_URI || '',
+    externalUrl: () => {
+        return `${config.protocol}://${config.domain}`
+    },
     rootPath: path.normalize(path.join(__dirname, '/../'))
 }
+module.exports = config

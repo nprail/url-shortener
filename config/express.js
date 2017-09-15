@@ -2,6 +2,9 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
 const morgan = require('morgan')
+const express = require('express')
+const config = require('./config')
+const path = require('path')
 /**
  * Express Config
  */
@@ -14,4 +17,6 @@ module.exports = (app) => {
         defaultLayout: 'main'
     }))
     app.set('view engine', '.hbs')
+    app.use(express.static(path.normalize(config.rootPath + '/public')))
+    app.use('/static', express.static(path.normalize(config.rootPath + '/public')))
 }

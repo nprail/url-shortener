@@ -1,0 +1,20 @@
+.app-title {
+    padding-bottom: 10px;
+}
+
+.success {
+    display: none;
+}
+
+#custom {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.custom-link-h4 {
+    margin-bottom: 20px;
+}
+
+.customize-link {
+    display: none;
+}
