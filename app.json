@@ -9,10 +9,7 @@
             "description": "Your short domain (or subdomain)",
             "required": false
         },
-        "MONGODB_URI": {
-            "description": "Your MongoDB server URI"
-        },
-        "MAIN_DOMAIN": {
+        "MAIN_URL": {
             "description": "Redirect main domain to",
             "required": false
         },

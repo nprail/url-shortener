@@ -10,7 +10,7 @@ const config = {
     externalUrl: () => {
         return `${config.protocol}://${config.domain}`
     },
-    mainDomain: env.MAIN_DOMAIN || '',
+    mainDomain: env.MAIN_URL || '',
     notFoundRedirect: env.NOTFOUND_REDIRECT || '',
     rootPath: path.normalize(path.join(__dirname, '/../'))
 }
