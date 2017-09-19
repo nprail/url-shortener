@@ -1,4 +1,4 @@
-# MEAN URL Shortener
+# MEAN URL Shortener [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/nprail/url-shortener/master/LICENSE) [![GitHub release](https://img.shields.io/github/release/nprail/url-shortener.svg)](https://github.com/nprail/url-shortener/releases) [![dependencies Status](https://david-dm.org/nprail/url-shortener/status.svg)](https://david-dm.org/nprail/url-shortener)
 A simple and modern URL shortener built with MEAN for easy deployment to Heroku!
 
 ## Goals
@@ -12,6 +12,14 @@ MEAN URL Shortener is built for easy self hosting. For hosting on Heroku, all yo
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+
+## Documentation
+
+You can find MEAN URL Shortener's documentation here:
+
+- [Wiki](https://github.com/nprail/url-shortener/wiki)
+- [API Docs](http://docs.nprailurlshortener.apiary.io)
+
 ## Stack
 - MEAN
   - MongoDB
@@ -21,6 +29,15 @@ MEAN URL Shortener is built for easy self hosting. For hosting on Heroku, all yo
   - Node.js
 - Bootstrap
 
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/nprail/url-shortener/releases).
+
+## Authors
+
+- **Noah Prail** - _Project Lead_ - [@nprail](https://github.com/nprail)
+
+See also the list of [contributors](https://github.com/nprail/url-shortener/contributors) who participated in this project.
 ## License
 ```
 MIT License
