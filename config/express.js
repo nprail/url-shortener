@@ -21,4 +21,13 @@ module.exports = (app) => {
 
     var currentYear = new Date().getFullYear();
     app.locals.date = currentYear
+
+    app.use(function (err, req, res, next) {
+        console.log(req)
+        console.error(err.stack)
+        if (err.code === 11000) {
+            console.log('Deplicate')
+        }
+        next(err)
+    })
 }

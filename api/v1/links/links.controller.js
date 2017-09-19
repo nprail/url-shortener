@@ -58,7 +58,14 @@ exports.show = function (req, res) {
 }
 
 const handleError = (res, err) => {
-    console.log('ERROR: ' + err)
+    if (err.code && err.code === 11000) {
+        return res.status(400).send({
+            name: 'In Use',
+            statusCode: 400,
+            message: 'Custom ending already in use. Please try a different one.'
+        })
+    }
+    console.log(err)
     return res.status(500).send(err)
 }
 

@@ -23,8 +23,8 @@ require('./config/routes')(app, config)
 
 app.listen(config.port, () => {
     if (app.get('env') === 'development') {
-        console.log(`URL Shortener: http://localhost:${config.port}`)
+        console.log(`URL Shortener: http://localhost:${config.port}/d`)
     } else {
-        console.log(`URL Shortener: http://${config.domain}`)
+        console.log(`URL Shortener: http://${config.domain}/d`)
     }
 })

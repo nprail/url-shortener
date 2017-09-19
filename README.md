@@ -8,9 +8,10 @@ A simple and modern URL shortener built with Express.js, MongoDB, and Handlebars
 - [Robust API](http://docs.nprailurlshortener.apiary.io)
 
 ## Stack
-- Node.js
-- MongoDB
-- Express.js
-- Handlebars.js
+- MEAN
+  - MongoDB
+  - Express.js
+    - Handlebars.js
+  - AngularJS
+  - Node.js
 - Bootstrap
-- JQuery

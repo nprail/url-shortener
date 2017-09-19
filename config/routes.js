@@ -12,26 +12,21 @@ module.exports = (app, config) => {
         }
     })
 
-    router.get('/d', (req, res) => {
+    router.get('/d/*', (req, res) => {
         return res.render('home', {
             domain: config.domain,
             externalUrl: config.externalUrl()
         })
     })
 
-    router.get('/d/about', (req, res) => {
+    /*router.get('/d/about', (req, res) => {
         return res.render('about', {
-            domain: config.domain,
-            externalUrl: config.externalUrl(),
-            mainDomain: config.mainDomain,
-            notFoundRedirect: config.notFoundRedirect,
-            protocol: config.protocol,
-            nenv: app.get('env'),
         })
     })
+
     router.get('/d/404', (req, res) => {
         return res.status(404)
-    })
+    })*/
 
     require(config.rootPath + '/api/api')(app, config)
 

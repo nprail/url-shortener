@@ -1,0 +1,33 @@
+<div class="text-center">
+    <h1 class="app-title">{{config.domain}}</h1>
+    <div ng-show="error" class="alert alert-danger" role="alert">
+        {{error.status}} {{error.statusText}} - {{error.data.message}}
+    </div>
+    <form ng-hide="success" id="linkForm" name="linkForm" ng-submit="shorten(link, linkForm.$valid)" novalidate>
+        <div class="form-group">
+            <input type="url" ng-model="link.url" class="form-control" id="url" name="url" ng-minlength="7" required placeholder="https://examplelongurl.com/seriously/really/long/url/">
+            <p ng-show="linkForm.url.$error.minlength" class="help-block">URL is too short</p>
+            <p ng-show="linkForm.url.$error.url" class="help-block">URL must be a valid URL</p>
+        </div>
+        <div class="" ng-show="showOptions">
+            <h4>Customize link: </h4>
+            <div class="row">
+                <div class="col-2 mx-auto">
+                    <input type="text" ng-model="link.custom" class="form-control" id="custom" name="custom" ng-minlength="2" placeholder="shorturl">
+                    <p ng-show="linkForm.custom.$error.minlength" class="help-block">Custom link is too short</p>
+                </div>
+            </div>
+            <h4 class="custom-link-h4">{{config.domain}}/{{link.custom}}</h4>
+        </div>
+        <input class="btn btn-primary" id="submit" type="submit" name="submit" value="Shorten" ng-disabled="linkForm.$invalid">
+        <input class="btn btn-primary" ng-click="show()" id="options" type="button" name="options" value="Options">
+    </form>
+    <div ng-show="success">
+        <h3>URL Shortened!</h3>
+        <p>
+            <a ng-href="{{config.externalUrl}}/{{link._id}}" target="_blank" rel="noopener">
+                {{config.externalUrl}}/{{link._id}}
+            </a>
+        </p>
+    </div>
+</div>

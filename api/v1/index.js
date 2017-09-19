@@ -28,7 +28,15 @@ module.exports = function (app, config) {
         res.json({
             domain: config.domain,
             version: pkg.version,
-            homepage: pkg.homepage
+            homepage: pkg.homepage,
+            config: {
+                domain: config.domain,
+                externalUrl: config.externalUrl(),
+                mainDomain: config.mainDomain,
+                notFoundRedirect: config.notFoundRedirect,
+                protocol: config.protocol,
+                nenv: app.get('env'),
+            }
         })
     })
 
