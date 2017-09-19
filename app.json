@@ -1,0 +1,30 @@
+{
+    "name": "MEAN URL Shortener",
+    "description": "A simple and modern URL shortener built with MEAN for easy deployment!",
+    "repository": "https://github.com/nprail/url-shortener",
+    "website": "https://go.nprail.me/d/about",
+    "keywords": ["mean", "node", "mongodb", "angularjs", "express", "url", "shortener", "url-shortener"],
+    "env": {
+        "DOMAIN": {
+            "description": "Your short domain (or subdomain)",
+            "required": false
+        },
+        "MONGODB_URI": {
+            "description": "Your MongoDB server URI"
+        },
+        "MAIN_DOMAIN": {
+            "description": "Redirect main domain to",
+            "required": false
+        },
+        "NOTFOUND_REDIRECT": {
+            "description": "Redirect nonexistent shortlinks to",
+            "required": false
+        }
+    },
+    "addons": [
+        {
+            "plan": "mongolab:sandbox"
+        }
+    ],
+    "success_url": "/d"
+}
