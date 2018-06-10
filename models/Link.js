@@ -5,25 +5,34 @@ module.exports = config => {
   const Schema = mongoose.Schema
 
   const LinkSchema = new Schema({
-    _id: {
+    short: {
       type: String,
       unique: true,
+      require: true,
       default: shortid.generate
     },
     created: {
       type: Date,
       default: Date.now
     },
-    url: String,
+    updated: {
+      type: Date,
+      default: Date.now
+    },
+    url: {
+      type: String,
+      required: true
+    },
     title: String,
     custom: String
   })
 
   LinkSchema.pre('save', function (next) {
-    let link = this
+    const link = this
     if (link.custom) {
-      link._id = link.custom
+      link.short = link.custom
     }
+    link.update = Date.now
 
     return next()
   })

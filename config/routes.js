@@ -1,9 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const Link = mongoose.model('Link')
-module.exports = (app, config) => {
-  const router = express.Router()
 
+const Link = mongoose.model('Link')
+const router = express.Router()
+
+module.exports = (app, config) => {
   router.get('/', (req, res) => {
     if (config.mainDomain) {
       return res.redirect(config.mainDomain)
@@ -12,6 +13,8 @@ module.exports = (app, config) => {
     }
   })
 
+  router.use('/d/api', require('..//api/api')(app, config))
+
   router.get('/d/*', (req, res) => {
     return res.render('home', {
       domain: config.domain,
@@ -19,22 +22,10 @@ module.exports = (app, config) => {
     })
   })
 
-  /* router.get('/d/about', (req, res) => {
-        return res.render('about', {
-        })
-    })
+  router.get('/:link_id', async (req, res) => {
+    try {
+      const link = await Link.findOne({ short: req.params.link_id }).exec()
 
-    router.get('/d/404', (req, res) => {
-        return res.status(404)
-    }) */
-
-  require(config.rootPath + '/api/api')(app, config)
-
-  router.get('/:link_id', (req, res) => {
-    Link.findById(req.params.link_id).exec((err, link) => {
-      if (err) {
-        return res.status(500).json(err)
-      }
       if (!link) {
         if (config.notFoundRedirect) {
           return res.redirect(
@@ -44,7 +35,10 @@ module.exports = (app, config) => {
         return res.status(404).send('Short URL not found!')
       }
       return res.redirect(link.url)
-    })
+    } catch (err) {
+      return res.status(500).json(err)
+    }
   })
+
   app.use('/', router)
 }

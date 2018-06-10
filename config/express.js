@@ -20,13 +20,12 @@ module.exports = app => {
     })
   )
   app.set('view engine', '.hbs')
-  app.use('/d', express.static(path.normalize(config.rootPath + '/public')))
+  app.use('/d', express.static(path.normalize(`${config.rootPath}/public`)))
 
-  var currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear()
   app.locals.date = currentYear
 
   app.use((err, req, res, next) => {
-    console.log(req)
     console.error(err.stack)
     if (err.code === 11000) {
       console.log('Deplicate')

@@ -1,56 +1,64 @@
 const mongoose = require('mongoose')
 const Link = mongoose.model('Link')
 
-exports.model = Link
+module.exports = () => {
+  const all = async (req, res) => {
+    try {
+      const perPage = Math.max(0, req.query.per_page) || 50
+      const page = Math.max(0, req.query.page)
+      const sort = req.query.sort || 'desc'
+      const orderBy = req.query.order_by || 'created'
+      let sortObj = {}
+      sortObj[orderBy] = sort
 
-exports.all = (req, res) => {
-  let perPage = Math.max(0, req.query.per_page) || 50
-  let page = Math.max(0, req.query.page)
-  let sort = req.query.sort || 'desc'
-  let orderBy = req.query.order_by || 'created'
-  let sortObj = {}
-  sortObj[orderBy] = sort
+      const links = await Link.find({})
+        .limit(perPage)
+        .skip(perPage * page)
+        .sort(sortObj)
+        .exec()
 
-  Link.find({})
-    .limit(perPage)
-    .skip(perPage * page)
-    .sort(sortObj)
-    .exec((err, links) => {
-      if (err) {
-        return handleError(res, err)
-      }
       if (!links) {
         return handle404(res)
       } else {
         res.json(links)
       }
-    })
-}
-
-exports.create = (req, res) => {
-  let link = req.body
-
-  return Link.create(link, (err, linkRes) => {
-    if (err) {
+    } catch (err) {
       return handleError(res, err)
     }
-    if (!linkRes) {
-      return handle404(res)
-    }
-    res.json(linkRes)
-  })
-}
+  }
 
-exports.show = (req, res) => {
-  Link.findById(req.params.link_id).exec((err, link) => {
-    if (err) {
+  const create = async (req, res) => {
+    try {
+      const link = req.body
+
+      const newLink = new Link(link)
+
+      const createdLink = await newLink.save()
+
+      if (!createdLink) {
+        return handle404(res)
+      }
+
+      return res.status(200).json(createdLink)
+    } catch (err) {
       return handleError(res, err)
     }
-    if (!link) {
-      return handle404(res, req.params.link_id)
+  }
+
+  const get = async (req, res) => {
+    try {
+      const link = await Link.findOne({ short: req.params.link_id }).exec()
+      if (!link) {
+        return handle404(res, req.params.link_id)
+      }
+
+      return res.status(200).json(link)
+    } catch (err) {
+      return handleError(res, err)
     }
-    res.json(link)
-  })
+  }
+
+  return { all, create, get, model: Link }
 }
 
 const handleError = (res, err) => {

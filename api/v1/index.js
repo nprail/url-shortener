@@ -3,7 +3,7 @@ const apiRouter = express.Router()
 const mongoose = require('mongoose')
 
 module.exports = (app, config) => {
-  const pkg = require(config.rootPath + '/package.json')
+  const pkg = require(`${config.rootPath}/package.json`)
 
   /**
      * @api {get} / Version
@@ -25,7 +25,7 @@ module.exports = (app, config) => {
      *     }
      */
   apiRouter.get('/', (req, res) => {
-    res.json({
+    return res.status(200).json({
       domain: config.domain,
       version: pkg.version,
       homepage: pkg.homepage,
@@ -76,7 +76,7 @@ module.exports = (app, config) => {
       mongoConnection = 'disconnecting'
     }
 
-    res.json({
+    return res.json({
       nodeCheck: {
         status: 'ok'
       },
