@@ -87,6 +87,8 @@ module.exports = (app, config) => {
   })
 
   apiRouter.use('/links', require('./links')(config))
+
+  apiRouter.use('/domains', require('./domains')(config))
   // apiRouter.use('/users', require('./users')(config))
 
   return apiRouter

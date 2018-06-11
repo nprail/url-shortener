@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const config = require('./config/config')
+const config = require('./config')
 
 if (!config.domain) {
   console.log('Please set your domain name!')
@@ -18,7 +18,7 @@ require('./config/express')(app)
 require('./config/mongoose')(config)
 
 // Routes
-require('./config/routes')(app, config)
+require('./routes')(app, config)
 
 // Error handler middleware
 require('./config/error-middleware')(app)

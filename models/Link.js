@@ -8,8 +8,18 @@ module.exports = config => {
     short: {
       type: String,
       unique: true,
-      require: true,
+      required: true,
       default: shortid.generate
+    },
+    url: {
+      type: String,
+      required: true
+    },
+    title: String,
+    custom: String,
+    domain: {
+      type: Schema.Types.ObjectId,
+      ref: 'Domain'
     },
     created: {
       type: Date,
@@ -18,13 +28,7 @@ module.exports = config => {
     updated: {
       type: Date,
       default: Date.now
-    },
-    url: {
-      type: String,
-      required: true
-    },
-    title: String,
-    custom: String
+    }
   })
 
   LinkSchema.pre('save', function (next) {
@@ -32,7 +36,7 @@ module.exports = config => {
     if (link.custom) {
       link.short = link.custom
     }
-    link.update = Date.now
+    link.updated = Date.now()
 
     return next()
   })

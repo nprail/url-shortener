@@ -13,9 +13,9 @@ module.exports = (app, config) => {
     }
   })
 
-  router.use('/d/api', require('../api/api')(app, config))
+  router.use('/api', require('../api/api')(app, config))
 
-  router.use('/d/auth', require('../routes/auth')(config))
+  router.use('/auth', require('../routes/auth')(config))
 
   router.get('/d/*', (req, res) => {
     return res.render('home', {

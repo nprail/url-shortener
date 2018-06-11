@@ -8,11 +8,14 @@ module.exports = config => {
   const controller = require('./links.controller')(config)
 
   router.get('/', controller.all)
+
   router.post('/shorten', isAuth, controller.create)
 
-  router.get('/lookup/:link_id', controller.get)
-  // router.put('/update/:link_id', controller.update)
-  // router.delete('/delete/:link_id', controller.delete)
+  router.get('/lookup/:short', controller.get)
+
+  router.put('/:short', isAuth, controller.update)
+
+  router.delete('/:short', isAuth, controller.remove)
 
   return router
 }
