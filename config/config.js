@@ -11,6 +11,7 @@ const config = {
   },
   mainDomain: process.env.MAIN_URL || '',
   notFoundRedirect: process.env.NOTFOUND_REDIRECT || '',
-  rootPath: path.normalize(path.join(__dirname, '/../'))
+  rootPath: path.normalize(path.join(__dirname, '/../')),
+  jwtSecret: process.env.JWT_SECRET
 }
 module.exports = config

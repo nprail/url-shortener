@@ -20,6 +20,9 @@ require('./config/mongoose')(config)
 // Routes
 require('./config/routes')(app, config)
 
+// Error handler middleware
+require('./config/error-middleware')(app)
+
 app.listen(config.port, () => {
   if (app.get('env') === 'development') {
     console.log(`URL Shortener: http://localhost:${config.port}/d`)
