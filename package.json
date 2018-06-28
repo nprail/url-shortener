@@ -2,19 +2,20 @@
   "name": "node-url-shortener",
   "version": "0.0.1",
   "description": "A simple and modern URL shortener built with Express.js, MongoDB, and Handlebars.js built for easy deployment to Heroku!",
-  "main": "server.js",
+  "main": "backend/server.js",
   "repository": "https://github.com/nprail/url-shortener",
   "author": "Noah Prail <me@nprail.me>",
   "license": "MIT",
   "private": false,
   "homepage": "https://go.nprail.me/app",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/server.js",
     "postinstall": "aglio --theme-variables streak -i apiary.apib --theme-template triple -o public/docs.html",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server/server.js"
   },
   "dependencies": {
     "aglio": "^2.3.0",
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",

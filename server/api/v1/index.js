@@ -1,9 +1,10 @@
 const express = require('express')
 const apiRouter = express.Router()
 const mongoose = require('mongoose')
+const path = require('path')
 
 module.exports = (app, config) => {
-  const pkg = require(`${config.rootPath}/package.json`)
+  const pkg = require(path.resolve(config.rootPath, '../package.json'))
 
   /**
      * @api {get} / Version
@@ -62,21 +63,32 @@ module.exports = (app, config) => {
      *     }
      */
   apiRouter.get('/healthcheck', (req, res) => {
+    let status = 200
     let mongoConnection
-    if (mongoose.connection.readyState === 0) {
-      mongoConnection = 'disconnected'
-    }
-    if (mongoose.connection.readyState === 1) {
-      mongoConnection = 'connected'
-    }
-    if (mongoose.connection.readyState === 2) {
-      mongoConnection = 'connecting'
-    }
-    if (mongoose.connection.readyState === 3) {
-      mongoConnection = 'disconnecting'
+
+    switch (mongoose.connection.readyState) {
+      case 0:
+        mongoConnection = 'disconnected'
+        status = 500
+        break
+      case 1:
+        mongoConnection = 'connected'
+        status = 200
+        break
+      case 2:
+        mongoConnection = 'connecting'
+        status = 500
+        break
+      case 3:
+        mongoConnection = 'disconnecting'
+        status = 500
+        break
+      default:
+        mongoConnection = 'unknown'
+        status = 500
     }
 
-    return res.json({
+    return res.status(status).json({
       nodeCheck: {
         status: 'ok'
       },

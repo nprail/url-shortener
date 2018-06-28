@@ -2,10 +2,6 @@ const express = require('express')
 const app = express()
 const config = require('./config')
 
-if (!config.domain) {
-  console.log('Please set your domain name!')
-  process.exit(1)
-}
 if (!config.mongoUri) {
   console.log('Please set your MongoDB URI!')
   process.exit(1)

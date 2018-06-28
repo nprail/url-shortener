@@ -7,9 +7,21 @@ module.exports = config => {
   const LinkSchema = new Schema({
     short: {
       type: String,
-      unique: true,
       required: true,
-      default: shortid.generate
+      default: function () {
+        if (this.custom) {
+          return this.custom
+        }
+        return shortid.generate()
+      }
+    },
+    gid: {
+      type: String,
+      required: true,
+      unique: true,
+      default: function () {
+        return `${this.short}-${this.domain}`
+      }
     },
     url: {
       type: String,
@@ -37,6 +49,8 @@ module.exports = config => {
       link.short = link.custom
     }
     link.updated = Date.now()
+
+    link.identifier = `${link.short}-${link.domain}`
 
     return next()
   })

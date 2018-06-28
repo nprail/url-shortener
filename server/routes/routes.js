@@ -17,26 +17,18 @@ module.exports = (app, config) => {
 
   router.use('/auth', require('../routes/auth')(config))
 
-  router.get('/d/*', (req, res) => {
-    return res.render('home', {
-      domain: config.domain,
-      externalUrl: config.externalUrl
-    })
-  })
-
-  router.get('/:link_id', async (req, res) => {
+  router.get('/:short', async (req, res) => {
     try {
-      const link = await Link.findOne({ short: req.params.link_id }).exec()
+      const { short } = req.params
+      const link = await Link.findOne({ short }).exec()
 
       if (!link) {
         if (config.notFoundRedirect) {
-          return res.redirect(
-            `${config.notFoundRedirect}?link=${req.params.link_id}`
-          )
+          return res.redirect(`${config.notFoundRedirect}?link=${short}`)
         }
         return res.status(404).send('Short URL not found!')
       }
-      return res.redirect(link.url)
+      return res.status(200).redirect(link.url)
     } catch (err) {
       return res.status(500).json(err)
     }

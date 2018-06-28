@@ -38,10 +38,6 @@ module.exports = () => {
 
       const createdLink = await newLink.save()
 
-      if (!createdLink) {
-        return next()
-      }
-
       return res.status(201).json(createdLink)
     } catch (err) {
       if (err.code && err.code === 11000) {
@@ -57,7 +53,9 @@ module.exports = () => {
   const get = async (req, res, next) => {
     try {
       const { short } = req.params
-      const query = { short }
+      const { domain } = req.query
+
+      const query = { short, domain }
 
       const link = await Link.findOne(query).exec()
 
@@ -74,7 +72,9 @@ module.exports = () => {
   const update = async (req, res, next) => {
     try {
       const { short } = req.params
-      const query = { short }
+      const { domain } = req.query
+
+      const query = { short, domain }
       const { custom, title, url } = req.body
 
       const linkDoc = await Link.findOne(query).populate('domain')
