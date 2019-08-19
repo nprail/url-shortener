@@ -2,7 +2,7 @@
     "name": "MEAN URL Shortener",
     "description": "A simple and modern URL shortener built with MEAN for easy deployment!",
     "repository": "https://github.com/nprail/url-shortener",
-    "website": "https://go.nprail.me/d/about",
+    "website": "https://github.com/nprail/url-shortener",
     "keywords": ["mean", "node", "mongodb", "angularjs", "express", "url", "shortener", "url-shortener"],
     "env": {
         "DOMAIN": {

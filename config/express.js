@@ -11,10 +11,17 @@ const config = require('./config')
  * Express Config
  */
 module.exports = app => {
-  app.use(helmet())
-  app.use(morgan('dev'))
+  if (config.env === 'production') {
+    app.use(helmet())
+  }
   app.use(bodyParser.urlencoded({ extended: false })) // get information from html forms
   app.use(bodyParser.json())
+
+  if (config.env === 'development') {
+    app.use(morgan('dev'))
+  } else {
+    app.use(morgan('combined'))
+  }
 
   // view engine
   app.engine(
@@ -35,7 +42,7 @@ module.exports = app => {
   app.use((err, req, res, next) => {
     console.error(err.stack)
     if (err.code === 11000) {
-      console.log('Deplicate')
+      console.log('Duplicate')
     }
     next(err)
   })

@@ -5,6 +5,7 @@ const config = {
   port: process.env.PORT || 3000,
   domain: process.env.DOMAIN || '',
   protocol: process.env.PROTOCOL || 'http',
+  env: process.env.NODE_ENV || 'development',
   mongoUri: process.env.MONGODB_URI || '',
   get externalUrl () {
     return `${this.protocol}://${this.domain}`
