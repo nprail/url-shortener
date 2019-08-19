@@ -14,53 +14,48 @@ const hashPassword = async password => {
 }
 
 module.exports = config => {
-  const Schema = mongoose.Schema
+  const { Schema } = mongoose
 
-  const UserSchema = new Schema({
-    email: {
-      type: String,
-      unique: true,
-      required: true
+  const UserSchema = new Schema(
+    {
+      email: {
+        type: String,
+        unique: true,
+        required: true
+      },
+      password: {
+        type: String,
+        required: true
+      }
     },
-    password: {
-      type: String,
-      required: true
-    },
-    created: {
-      type: Date,
-      default: Date.now
-    },
-    updated: {
-      type: Date,
-      default: Date.now
-    }
-  })
+    { timestamps: true }
+  )
 
-  UserSchema.pre('save', function (next) {
-    const user = this
+  UserSchema.pre('save', async function (next) {
+    try {
+      const user = this
 
-    if (user.isModified('password') || user.isNew) {
-      hashPassword(user.password)
-        .then(res => {
-          user.password = res
-          next()
-        })
-        .catch(err => {
-          return next(err)
-        })
-    } else {
+      if (user.isModified('password') || user.isNew) {
+        const pass = await hashPassword(user.password)
+        user.password = pass
+        next()
+      }
+
       return next()
+    } catch (err) {
+      return next(err)
     }
   })
 
   // Create method to compare password input to password saved in database
-  UserSchema.methods.comparePassword = function (password, cb) {
-    bcrypt.compare(password, this.password, function (err, isMatch) {
-      if (err) {
-        return cb(err)
-      }
-      cb(null, isMatch)
-    })
+  UserSchema.methods.comparePassword = async function (password, next) {
+    try {
+      const isMatch = await bcrypt.compare(password, this.password)
+
+      next(null, isMatch)
+    } catch (err) {
+      return next(err)
+    }
   }
 
   UserSchema.methods.generateJwt = function () {
@@ -74,6 +69,7 @@ module.exports = config => {
 
     return jwt.sign(payload, config.jwtSecret, opts)
   }
+
   const model = mongoose.model('User', UserSchema)
 
   return model

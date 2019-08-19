@@ -7,7 +7,7 @@ module.exports = () => {
       const perPage = Math.max(0, req.query.per_page) || 50
       const page = Math.max(0, req.query.page)
       const sort = req.query.sort || 'desc'
-      const orderBy = req.query.order_by || 'created'
+      const orderBy = req.query.order_by || 'createdAt'
       let sortObj = {}
       sortObj[orderBy] = sort
 
@@ -70,7 +70,6 @@ module.exports = () => {
         throw err
       }
 
-      domainDoc.updated = Date.now()
       domainDoc.owner = owner || domainDoc.owner
       domainDoc.settings = settings || domainDoc.settings
 

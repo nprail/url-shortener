@@ -12,7 +12,7 @@ A simple and modern URL shortener built with Express.js, MongoDB, and Handlebars
     + per_page: `50` (number) - Links per page
     + page: `0` (number) - Page number (starts a 0)
     + sort: `desc` (string) - Sort direction (desc, asc)
-    + order_by: `created` (string) - Item to order by
+    + order_by: `createdAt` (string) - Item to order by
     
 + Response 200 (application/json)
 
@@ -20,13 +20,13 @@ A simple and modern URL shortener built with Express.js, MongoDB, and Handlebars
             {
                 "_id": "Hktmf6Y5-",
                 "url": "https://examplelongurl.com/seriously/really/long/url/",
-                "created": "2015-08-05T08:40:51.620Z",
+                "createdAt": "2015-08-05T08:40:51.620Z",
             },
             {
                 "_id": "source",
                 "url": "https://github.com/nprail/url-shortener",
                 "custom": "source",
-                "created": "2015-08-05T08:40:51.620Z",
+                "createdAt": "2015-08-05T08:40:51.620Z",
             }
         ]
 
@@ -48,7 +48,7 @@ A simple and modern URL shortener built with Express.js, MongoDB, and Handlebars
             {
                 "_id": "Hktmf6Y5-",
                 "url": "https://examplelongurl.com/seriously/really/long/url/",
-                "created": "2015-08-05T08:40:51.620Z",
+                "createdAt": "2015-08-05T08:40:51.620Z",
             }
 
 ## Lookup [/links/lookup/{link_id}]
@@ -66,5 +66,5 @@ A simple and modern URL shortener built with Express.js, MongoDB, and Handlebars
             {
                 "_id": "Hktmf6Y5-",
                 "url": "https://examplelongurl.com/seriously/really/long/url/",
-                "created": "2015-08-05T08:40:51.620Z",
+                "createdAt": "2015-08-05T08:40:51.620Z",
             }
