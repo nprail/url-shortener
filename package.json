@@ -19,7 +19,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
-    "express-jwt": "^5.3.1",
+    "express-jwt": "^6.0.0",
     "helmet": "^3.8.1",
     "jsonwebtoken": "^8.2.2",
     "mongoose": "^5.1.4",
